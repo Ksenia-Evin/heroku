@@ -14,6 +14,26 @@ def test(num):
 def generate_message():
   return '{0} {1} {2} {3} {4}'.format(random.choice(sayings.beginnings), random.choice(sayings.subjects),random.choice(sayings.verbs), random.choice(sayings.actions), random.choice(sayings.ends))
 
+@route("/")
+def index():
+    html = """
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Генератор утверждений</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Коллеги, добрый день!</h1>
+      <p class="small">Чтобы сформировать одно утверждение перейдите по пути /api/generate</p>
+      <p class="small">Чтобы сформировать несколько утверждений перейдите по пути /api/generate/количество желаемых утверждений.</p>
+      <p class="small">Например, хочу 8 утверждений! api/generate/8</p>
+    </div>
+  </body>
+</html>
+"""
+    return html
+
 @route("/api/generate")
 def receive_json():
     return json.dumps(test(1), ensure_ascii=False)
